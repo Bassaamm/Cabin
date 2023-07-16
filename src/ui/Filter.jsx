@@ -42,6 +42,7 @@ export default function Filter({ equalField, values }) {
 
   function handleClick(value) {
     searchParams.set(equalField, value);
+    if (searchParams.get("page")) searchParams.set("page", 1);
     setSearchParams(searchParams);
   }
   return (

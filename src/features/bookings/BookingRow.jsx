@@ -8,6 +8,9 @@ import { formatCurrency } from "../../utils/helpers";
 import { formatDistanceFromNow } from "../../utils/helpers";
 import Menus from "../../ui/Menus";
 import { Navigate, useNavigate } from "react-router-dom";
+import { FiCopy } from "react-icons/fi";
+import { useCheckOut } from "../check-in-out/useCheckOut";
+import { useState } from "react";
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -50,6 +53,7 @@ function BookingRow({
     cabin: { name: cabinName },
   },
 }) {
+  const { checkOut, isLoading: checkoutLoading } = useCheckOut();
   const navigate = useNavigate();
   const statusToTagName = {
     unconfirmed: "blue",
@@ -82,19 +86,35 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-      <Menus.Menu>
-        <Menus.Toggle id={bookingId} />
-        <Menus.List id={bookingId}>
-          <Menus.Button onClick={() => navigate(`/bookings/${bookingId}`)}>
-            Check details
-          </Menus.Button>
-          {status === "unconfirmed" && (
-            <Menus.Button onClick={() => navigate(`/checkin/${bookingId}`)}>
-              Check in
+      <Menus>
+        <Menus.Menu>
+          <Menus.Toggle id={bookingId} />
+          <Menus.List id={bookingId}>
+            <Menus.Button
+              icon={<FiCopy />}
+              onClick={() => navigate(`/bookings/${bookingId}`)}
+            >
+              Details
             </Menus.Button>
-          )}
-        </Menus.List>
-      </Menus.Menu>
+            {status === "unconfirmed" && (
+              <Menus.Button
+                icon={<FiCopy />}
+                onClick={() => navigate(`/checkin/${bookingId}`)}
+              >
+                Check in
+              </Menus.Button>
+            )}
+            {status === "checked-in" && (
+              <Menus.Button
+                icon={<FiCopy />}
+                onClick={() => checkOut(bookingId)}
+              >
+                Check out
+              </Menus.Button>
+            )}
+          </Menus.List>
+        </Menus.Menu>
+      </Menus>
     </Table.Row>
   );
 }
