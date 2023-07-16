@@ -10,7 +10,6 @@ export function useBookings() {
     !filterStatus || filterStatus === "all"
       ? null
       : { field: "status", value: filterStatus };
-  // { field: "totalPrice", value: 5000, method: "gte" };
   /////////////////////////////////////////////////////////
 
   //Sorting
