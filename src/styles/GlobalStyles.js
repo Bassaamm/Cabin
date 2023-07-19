@@ -148,7 +148,7 @@ img {
   --thumbBG: #6366f1;
 }
 ::-webkit-scrollbar {
-  width: 12px;
+  width:8px;
 }
 ::-webkit-scrollbar-track {
   background: var(--scrollbarBG);

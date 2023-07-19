@@ -31,7 +31,7 @@ const StyledToggle = styled.button`
 `;
 
 const StyledList = styled.ul`
-  position: absolute;
+  position: fixed;
   background-color: var(--color-grey-0);
   box-shadow: var(--shadow-md);
   border-radius: var(--border-radius-md);
@@ -86,8 +86,8 @@ function Toggle({ id }) {
     e.stopPropagation();
     const coordinate = e.target.closest("button").getBoundingClientRect();
     setCoordinate({
-      x: 40,
-      y: -45,
+      x: window.innerWidth - coordinate.x + 5,
+      y: coordinate.y + 20,
     });
     openId === "" || openId !== id ? open(id) : close();
     console.log(openId);

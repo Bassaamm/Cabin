@@ -11,7 +11,7 @@ export function usedropBooking() {
     onSuccess: () => {
       toast.success("Have been deleted successfully ");
       queryClint.invalidateQueries({ queryKey: ["Booking"] });
-      navigate("/Bookings");
+      navigate(-1);
     },
     onError: () => toast.error("Couldn't delete something happend"),
   });

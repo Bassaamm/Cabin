@@ -12,6 +12,7 @@ export default function CabinTable() {
   const { cabins, isLoading, error } = useCabin();
   const [searchParams] = useSearchParams();
   const filter = searchParams.get("discount") || "all";
+  if (error) console.log(error);
   if (isLoading) return <Spinner />;
   /////////////////////////////////////////////
   let filterCabin;

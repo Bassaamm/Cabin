@@ -23,7 +23,6 @@ const HeadingGroup = styled.div`
 
 function BookingDetail() {
   const { checkOut, isLoading: checkoutLoading } = useCheckOut();
-
   const { booking, isLoading } = useBooking();
   const { dropBooking, isLoading: dropLoading } = usedropBooking();
   const moveBack = useMoveBack();

@@ -15,6 +15,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 import Booking from "./pages/Booking";
+import ProtectedRoutes from "./ui/ProtectedRoutes";
+import { styled } from "styled-components";
 const queryClinet = new QueryClient({
   defaultOptions: {
     queries: {
@@ -22,6 +24,7 @@ const queryClinet = new QueryClient({
     },
   },
 });
+
 function App() {
   return (
     <>
@@ -30,7 +33,13 @@ function App() {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                <ProtectedRoutes>
+                  <AppLayout />
+                </ProtectedRoutes>
+              }
+            >
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="bookings" element={<Bookings />} />

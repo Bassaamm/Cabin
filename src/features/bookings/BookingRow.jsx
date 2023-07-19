@@ -53,7 +53,6 @@ function BookingRow({
     cabin: { name: cabinName },
   },
 }) {
-  const { checkOut, isLoading: checkoutLoading } = useCheckOut();
   const navigate = useNavigate();
   const statusToTagName = {
     unconfirmed: "blue",
@@ -86,35 +85,25 @@ function BookingRow({
       <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag>
 
       <Amount>{formatCurrency(totalPrice)}</Amount>
-      <Menus>
-        <Menus.Menu>
-          <Menus.Toggle id={bookingId} />
-          <Menus.List id={bookingId}>
+      <Menus.Menu>
+        <Menus.Toggle id={bookingId} />
+        <Menus.List id={bookingId}>
+          <Menus.Button
+            icon={<FiCopy />}
+            onClick={() => navigate(`/bookings/${bookingId}`)}
+          >
+            Details
+          </Menus.Button>
+          {status === "unconfirmed" && (
             <Menus.Button
               icon={<FiCopy />}
-              onClick={() => navigate(`/bookings/${bookingId}`)}
+              onClick={() => navigate(`/checkin/${bookingId}`)}
             >
-              Details
+              check in
             </Menus.Button>
-            {status === "unconfirmed" && (
-              <Menus.Button
-                icon={<FiCopy />}
-                onClick={() => navigate(`/checkin/${bookingId}`)}
-              >
-                Check in
-              </Menus.Button>
-            )}
-            {status === "checked-in" && (
-              <Menus.Button
-                icon={<FiCopy />}
-                onClick={() => checkOut(bookingId)}
-              >
-                Check out
-              </Menus.Button>
-            )}
-          </Menus.List>
-        </Menus.Menu>
-      </Menus>
+          )}
+        </Menus.List>
+      </Menus.Menu>
     </Table.Row>
   );
 }
