@@ -4,6 +4,7 @@ import { FiLogOut, FiSettings } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import Logout from "../features/authentication/Logout";
 import { useLogout } from "../features/authentication/useLogout";
+import DarkModeToggle from "./DarkModeToggle";
 
 const StyledHeaderMenu = styled.ul`
   display: flex;
@@ -17,6 +18,9 @@ export default function HeaderMenu() {
   const navigate = useNavigate();
   return (
     <StyledHeaderMenu>
+      <li>
+        <DarkModeToggle />
+      </li>
       <li>
         <ButtonIcon onClick={() => navigate("/account")}>
           <FiSettings />
