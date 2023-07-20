@@ -61,7 +61,7 @@ export async function getStaysAfterDate(date) {
   const { data, error } = await supabase
     .from("bookings")
     // .select('*')
-    .select("*, guests(fullName)")
+    .select("*, guest(fullName)")
     .gte("startDate", date)
     .lte("startDate", getToday());
 
@@ -74,18 +74,19 @@ export async function getStaysAfterDate(date) {
 }
 
 // Activity means that there is a check in or a check out today
+//Could query all the bookings and filter here with a condition like this
+// (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
+// (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
+//BUT IT'S NOT GOOD BECAUSE WE DON'T NEED ALLL THE DATA AND IT'S NOT A GOOD PRACTICE ONLY QUERY THE DATA YOU NEED.
 export async function getStaysTodayActivity() {
   const { data, error } = await supabase
     .from("bookings")
-    .select("*, guests(fullName, nationality, countryFlag)")
+    .select("*, guest(fullName, nationality, countryFlag)")
     .or(
       `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
     )
     .order("created_at");
-
-  // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
-  // (stay.status === 'unconfirmed' && isToday(new Date(stay.startDate))) ||
-  // (stay.status === 'checked-in' && isToday(new Date(stay.endDate)))
+  //THE QUERY UP HERE WILL PICK ONE OF THE TRY CONDITION IN THE OR FUNCTION PROVIDED BY SUPABASE  WICH WILL BE EITHER UNCONFIRMED OR CHECKED-IN..  DATABASE 101 COURSE IS PAYING OFF WHEN IT COMES TO UNDERSTAND SQL CODE :))
 
   if (error) {
     console.error(error);

@@ -29,8 +29,8 @@ function BookingDetail() {
   const navigate = useNavigate();
 
   if (isLoading) return <Spinner />;
+  if (!booking) return navigate("/bookings");
   const { status, id: bookingId } = booking;
-
   const statusToTagName = {
     unconfirmed: "blue",
     "checked-in": "green",
@@ -57,6 +57,7 @@ function BookingDetail() {
           <Button
             onClick={() => {
               checkOut(bookingId);
+              navigate("/bookings");
             }}
           >
             Check out
