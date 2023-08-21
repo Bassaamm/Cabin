@@ -14,14 +14,7 @@ function Logo() {
   const { darkMode } = useDarkMode();
   return (
     <StyledLogo>
-      <Img
-        src={
-          !darkMode
-            ? "src\\data\\img\\logo-light.png"
-            : "src\\data\\img\\logo-dark.png"
-        }
-        alt="Logo"
-      />
+      <Img src={"src/data/img/logo.png"} alt="Logo" />
     </StyledLogo>
   );
 }

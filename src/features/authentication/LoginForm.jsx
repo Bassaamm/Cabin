@@ -34,7 +34,6 @@ function LoginForm() {
       <FormRowVertical label="Password">
         <Input
           disabled={isLoading}
-          type="password"
           id="password"
           autoComplete="current-password"
           value={password}
