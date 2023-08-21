@@ -9,7 +9,7 @@ import SpinnerMini from "../../ui/SpinnerMini";
 import Spinner from "../../ui/Spinner";
 function LoginForm() {
   const [email, setEmail] = useState("bassam@test.com");
-  const [password, setPassword] = useState("test");
+  const [password, setPassword] = useState("123123123");
   const { mutate: userData, isLoading, error } = useLoginUser();
 
   function handleSubmit(e) {
@@ -26,7 +26,6 @@ function LoginForm() {
           disabled={isLoading}
           type="email"
           id="email"
-          // This makes this form better for password managers
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}

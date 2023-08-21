@@ -5,6 +5,7 @@ import Heading from "../ui/Heading";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../features/authentication/userUser";
 import Spinner from "../ui/Spinner";
+import { useMemo } from "react";
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
@@ -18,9 +19,11 @@ const LoginLayout = styled.main`
 export default function Login() {
   const navigate = useNavigate();
   const { isAuthenticated, isLoading: userLoading } = useUser();
+  const checkLog = useMemo(() => {
+    if (isAuthenticated) return navigate("/");
+  }, [navigate, isAuthenticated]);
 
   if (userLoading) return <Spinner />;
-  if (isAuthenticated) return navigate("/");
   return (
     <LoginLayout>
       <Logo />
