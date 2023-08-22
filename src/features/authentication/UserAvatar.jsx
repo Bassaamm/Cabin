@@ -26,8 +26,7 @@ export default function UserAvatar() {
   console.log(avatar, fullName);
   return (
     <StyledUserAvatar>
-      <Avatar src={avatar || "public/default-user.jpg"} />{" "}
-      <span>{fullName}</span>
+      <Avatar src={avatar || "/default-user.jpg"} /> <span>{fullName}</span>
     </StyledUserAvatar>
   );
 }
