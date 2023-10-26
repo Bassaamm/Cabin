@@ -1,5 +1,8 @@
 # Cabin
 
+## Note: I'm using supabase for the back-end and it deactivate the back-end if there are not actions or request in 7 days so most of the time when you try to use the project it's deactivate and it won't log you, if you want to try it gimme a message on twitter 
+
+ 
 ## Note: does not support small size screens yet
 ## Link ---> [Here](https://cabin-kohl.vercel.app) .
 
