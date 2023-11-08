@@ -35,6 +35,7 @@ function LoginForm() {
         <Input
           disabled={isLoading}
           id="password"
+          type="password"
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
