@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../features/authentication/userUser";
 import Spinner from "../ui/Spinner";
 import { useMemo } from "react";
+
 const LoginLayout = styled.main`
   min-height: 100vh;
   display: grid;
@@ -14,6 +15,11 @@ const LoginLayout = styled.main`
   justify-content: center;
   gap: 3.2rem;
   background-color: var(--color-grey-50);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    padding: 2rem;
+  }
 `;
 
 export default function Login() {
